@@ -1,0 +1,35 @@
+{
+    "if": {
+        "allOf": [
+            {
+                "field": "[concat('tags[', parameters('tagName1'), ']')]",
+                "exists": "false"
+            },
+            {
+                "field": "[concat('tags[', parameters('tagName2'), ']')]",
+                "exists": "false"
+            },
+            {
+                "field": "[concat('tags[', parameters('tagName3'), ']')]",
+                "exists": "false"
+            }
+        ]
+    },
+    "then": {
+        "effect": "append",
+        "details": [
+            {
+                "field": "[concat('tags[', parameters('tagName1'), ']')]",
+                "value": "[parameters('tagValue1')]"
+            },
+            {
+                "field": "[concat('tags[', parameters('tagName2'), ']')]",
+                "value": "[parameters('tagValue2')]"
+            },
+            {
+                "field": "[concat('tags[', parameters('tagName3'), ']')]",
+                "value": "[parameters('tagValue3')]"
+            }
+        ]
+    }
+}
