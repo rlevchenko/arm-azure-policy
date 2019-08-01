@@ -1,0 +1,88 @@
+{
+    "mode": "Indexed",
+    "parameters": {
+        "tagName1": {
+            "type": "String",
+            "metadata": {
+                "displayName": "Tag1 Name",
+                "description": "Name of the tag, such as 'environment'"
+            },
+            "defaultValue": "environment"
+        },
+        "tagValue1": {
+            "type": "String",
+            "metadata": {
+                "displayName": "Tag1 Value",
+                "description": "Value of the tag, such as 'production'"
+            },
+            "defaultValue": "production"
+        },
+        "tagName2": {
+            "type": "String",
+            "metadata": {
+                "displayName": "Tag2 Name",
+                "description": "Name of the tag, such as 'service'"
+            },
+            "defaultValue": "service"
+        },
+        "tagValue2": {
+            "type": "String",
+            "metadata": {
+                "displayName": "Tag2 Value",
+                "description": "Value of the tag, such as 'webapps'"
+            },
+            "defaultValue": "webapps"
+        },
+        "tagName3": {
+            "type": "String",
+            "metadata": {
+                "displayName": "Tag3 Name",
+                "description": "Name of the tag, such as 'project'"
+            },
+            "defaultValue": "project"
+        },
+        "tagValue3": {
+            "type": "String",
+            "metadata": {
+                "displayName": "Tag3 Value",
+                "description": "Value of the tag, such as 'POC'"
+            },
+            "defaultValue": "POC"
+        }
+    },
+    "policyRule": {
+        "if": {
+            "allOf": [
+                {
+                    "field": "[concat('tags[', parameters('tagName1'), ']')]",
+                    "exists": "false"
+                },
+                {
+                    "field": "[concat('tags[', parameters('tagName2'), ']')]",
+                    "exists": "false"
+                },
+                {
+                    "field": "[concat('tags[', parameters('tagName3'), ']')]",
+                    "exists": "false"
+                }
+            ]
+        },
+        "then": {
+            "effect": "append",
+            "details": [
+                {
+                    "field": "[concat('tags[', parameters('tagName1'), ']')]",
+                    "value": "[parameters('tagValue1')]"
+                },
+                {
+                    "field": "[concat('tags[', parameters('tagName2'), ']')]",
+                    "value": "[parameters('tagValue2')]"
+                },
+                {
+                    "field": "[concat('tags[', parameters('tagName3'), ']')]",
+                    "value": "[parameters('tagValue3')]"
+                }
+            ]
+        }
+    }
+}
